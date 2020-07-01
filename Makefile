@@ -3,31 +3,18 @@
 
 BIN = $(shell yarn bin)
 
-test:
-	${BIN}/firebase emulators:exec --only firestore "${BIN}/karma start --single-run"
-.PHONY: test
-
-test-watch:
-	${BIN}/firebase emulators:exec --only firestore "${BIN}/karma start"
-
-test-setup:
-	${BIN}/firebase setup:emulators:firestore
-
-test-system:
-	env SYSTEM_TESTS=true ${BIN}/karma start --single-run
-
-test-system-watch:
-	env SYSTEM_TESTS=true ${BIN}/karma start
-
 build:
 	@rm -rf lib
-	@${BIN}/tsc
-	@${BIN}/prettier "lib/**/*.[jt]s" --write --loglevel silent
+	@${BIN}/tsc --outDir lib/react
 	@cp {package.json,*.md} lib/react
 	@rsync --archive --prune-empty-dirs --exclude '*.ts' --relative src/./ lib/react
-	@cp -r lib/react lib/preact
-	@${BIN}/ts-node --skip-project scripts/patchReact.ts
-	@${BIN}/ts-node --skip-project scripts/patchPreact.ts
+	@${BIN}/ts-node --project tsconfig.node.json scripts/patchReact.ts
+	@${BIN}/ts-node --project tsconfig.node.json scripts/switchAdaptor.ts preact
+	@${BIN}/tsc --outDir lib/preact
+	@cp {package.json,*.md} lib/preact
+	@rsync --archive --prune-empty-dirs --exclude '*.ts' --relative src/./ lib/preact
+	@${BIN}/ts-node --project tsconfig.node.json scripts/patchPreact.ts
+	@${BIN}/ts-node --project tsconfig.node.json scripts/switchAdaptor.ts react
 
 publish: build
 	cd lib/react && npm publish --access public
