@@ -12,6 +12,11 @@ export type AuthOptions = {
   redirect?: boolean
 }
 
+export type AuthEmailOptions = {
+  email: string
+  url: string
+}
+
 export function firebaseSignIn(
   instance: AuthInstance,
   namespace: AuthNamespace,
@@ -23,6 +28,20 @@ export function firebaseSignIn(
   } else {
     return instance.signInWithPopup(getProvider(namespace, provider))
   }
+}
+
+export function firebaseSendSignInLink(
+  instance: AuthInstance,
+  options: AuthEmailOptions
+) {
+  return instance.sendSignInLinkToEmail(options.email, { url: options.url })
+}
+
+export function firebaseSignInWithLink(
+  instance: AuthInstance,
+  options: AuthEmailOptions
+) {
+  return instance.signInWithEmailLink(options.email, options.url)
 }
 
 export function firebaseSignOut(auth: AuthInstance) {
