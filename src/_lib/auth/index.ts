@@ -34,7 +34,10 @@ export function firebaseSendSignInLink(
   instance: AuthInstance,
   options: AuthEmailOptions
 ) {
-  return instance.sendSignInLinkToEmail(options.email, { url: options.url })
+  return instance.sendSignInLinkToEmail(options.email, {
+    url: options.url,
+    handleCodeInApp: true
+  })
 }
 
 export function firebaseSignInWithLink(
