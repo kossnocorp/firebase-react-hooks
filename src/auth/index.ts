@@ -18,7 +18,7 @@ export function sendSignInLink(options: AuthEmailOptions) {
   return firebaseSendSignInLink(firebase.auth(), options)
 }
 
-export function signInWithLinK(options: AuthEmailOptions) {
+export function signInWithLink(options: AuthEmailOptions) {
   return firebaseSignInWithLink(firebase.auth(), options)
 }
 

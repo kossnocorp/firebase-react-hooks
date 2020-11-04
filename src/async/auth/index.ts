@@ -19,7 +19,7 @@ export async function sendSignInLink(options: AuthEmailOptions) {
   return firebaseSendSignInLink(firebase.auth(), options)
 }
 
-export async function signInWithLinK(options: AuthEmailOptions) {
+export async function signInWithLink(options: AuthEmailOptions) {
   const firebase = await import('firebase/app')
   await import('firebase/auth')
   return firebaseSignInWithLink(firebase.auth(), options)
