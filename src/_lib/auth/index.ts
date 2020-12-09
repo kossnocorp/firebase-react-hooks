@@ -1,6 +1,8 @@
-export type AuthUser = null | undefined | import('firebase').User
+import type firebase from 'firebase/app'
 
-export type AuthNamespace = typeof import('firebase').auth
+export type AuthUser = null | undefined | firebase.User
+
+export type AuthNamespace = typeof firebase.auth
 
 export type AuthInstance = AuthNamespace extends () => infer Instance
   ? Instance

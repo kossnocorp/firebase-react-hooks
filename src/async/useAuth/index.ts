@@ -6,7 +6,7 @@ export default function useAuth() {
   const [user, setUser] = useState<AuthUser>(undefined)
   useEffect(() => {
     Promise.all([import('firebase/app'), import('firebase/auth')]).then(
-      ([firebase]) => {
+      ([{ default: firebase }]) => {
         firebaseOnAuthStateChanged(firebase.auth(), setUser)
       }
     )

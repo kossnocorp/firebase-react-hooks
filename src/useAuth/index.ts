@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useEffect, useState } from '../adaptor'
 import { AuthUser } from '../_lib/auth'
