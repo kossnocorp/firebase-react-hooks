@@ -11,6 +11,10 @@ const adaptorPackageJSONPath = resolve(
   rootPath,
   'lib/preact/adaptor/package.json'
 )
+const esmAdaptorPackageJSONPath = resolve(
+  rootPath,
+  'lib/preact/esm/adaptor/package.json'
+)
 
 Promise.all([
   readFile(packageJSONPath, 'utf8')
@@ -24,6 +28,19 @@ Promise.all([
 
   writeFile(
     adaptorPackageJSONPath,
+    JSON.stringify(
+      {
+        main: './preact',
+        module: '../esm/adaptor/preact.js',
+        sideEffects: false
+      },
+      null,
+      2
+    )
+  ),
+
+  writeFile(
+    esmAdaptorPackageJSONPath,
     JSON.stringify({ main: './preact' }, null, 2)
   )
 ]).catch(err => {

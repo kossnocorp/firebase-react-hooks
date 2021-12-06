@@ -1,0 +1,4 @@
+{
+  "module": "../esm/async/index.js",
+  "sideEffects": false
+}

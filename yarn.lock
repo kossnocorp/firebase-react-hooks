@@ -1851,6 +1851,13 @@ jws@^4.0.0:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
 
+lazyfire@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/lazyfire/-/lazyfire-0.3.1.tgz#0d20acbb9d35f2e28f16c6f5e50817988a66c03d"
+  integrity sha512-d8gonvR4LMFgez508P5hbSrAWTumj9LhveBhnqkB51QXsYJkG89po4a9bG9wFsI5MiOLfNtciNEPVV8IcD6tYA==
+  dependencies:
+    firebase "8"
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"

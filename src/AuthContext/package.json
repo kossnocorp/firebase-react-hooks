@@ -1,0 +1,4 @@
+{
+  "module": "../esm/AuthContext/index.js",
+  "sideEffects": false
+}

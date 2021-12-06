@@ -12,6 +12,7 @@ export type AuthProvider = 'twitter' | 'google' | 'github'
 
 export type AuthOptions = {
   redirect?: boolean
+  persistance?: firebase.auth.Auth.Persistence
 }
 
 export type AuthEmailOptions = {

@@ -7,19 +7,46 @@ const writeFile = promisify(fs.writeFile)
 
 const rootPath = process.cwd()
 const packageJSONPath = resolve(rootPath, 'lib/react/package.json')
+const adaptorPackageJSONPath = resolve(
+  rootPath,
+  'lib/react/adaptor/package.json'
+)
+const esmAdaptorPackageJSONPath = resolve(
+  rootPath,
+  'lib/react/esm/adaptor/package.json'
+)
 
-readFile(packageJSONPath, 'utf8')
-  .then(JSON.parse)
-  .then(packageJSON =>
-    writeFile(
-      packageJSONPath,
-      JSON.stringify(patchPackageJSON(packageJSON), null, 2)
+Promise.all([
+  readFile(packageJSONPath, 'utf8')
+    .then(JSON.parse)
+    .then(packageJSON =>
+      writeFile(
+        packageJSONPath,
+        JSON.stringify(patchPackageJSON(packageJSON), null, 2)
+      )
+    ),
+
+  writeFile(
+    adaptorPackageJSONPath,
+    JSON.stringify(
+      {
+        main: './react',
+        module: '../esm/adaptor/preact.js',
+        sideEffects: false
+      },
+      null,
+      2
     )
+  ),
+
+  writeFile(
+    esmAdaptorPackageJSONPath,
+    JSON.stringify({ main: './react' }, null, 2)
   )
-  .catch(err => {
-    console.error(err)
-    process.exit(1)
-  })
+]).catch(err => {
+  console.error(err)
+  process.exit(1)
+})
 
 type PackageJSON = {
   peerDependencies: { [key: string]: string }

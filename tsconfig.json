@@ -2,8 +2,8 @@
   "compilerOptions": {
     "rootDirs": ["src"],
     "declaration": true,
-    "target": "es2019",
-    "module": "es2020",
+    "target": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "lib/react",

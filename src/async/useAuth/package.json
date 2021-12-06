@@ -1,0 +1,4 @@
+{
+  "module": "../../esm/async/useAuth/index.js",
+  "sideEffects": false
+}

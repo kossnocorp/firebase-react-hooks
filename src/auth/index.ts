@@ -11,7 +11,15 @@ import {
 } from '../_lib/auth'
 
 export function signIn(provider: AuthProvider, options?: AuthOptions) {
-  return firebaseSignIn(firebase.auth(), firebase.auth, provider, options)
+  const doSignIn = () =>
+    firebaseSignIn(firebase.auth(), firebase.auth, provider, options)
+
+  if (options?.persistance)
+    return firebase
+      .auth()
+      .setPersistence(options?.persistance)
+      .then<any>(doSignIn)
+  else return doSignIn()
 }
 
 export function sendSignInLink(options: AuthEmailOptions) {
